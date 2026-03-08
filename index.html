@@ -1,0 +1,771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ElevateTech Africa</title>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;700;900&family=Open+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── RESET & BASE ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --teal:   #39AFA6;
+      --teal-d: #2a9088;
+      --yellow: #FFD700;
+      --orange: #FFA500;
+      --navy:   #1A2D44;
+      --navy-l: #223a57;
+      --gray:   #E6E6E6;
+      --off:    #f5f7f7;
+      --text:   #111827;
+      --muted:  #5a6a7a;
+      --white:  #ffffff;
+    }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Open Sans', sans-serif;
+      color: var(--text);
+      background: var(--white);
+      min-height: 100vh;
+    }
+
+    /* ── NAVBAR ── */
+    header {
+      position: sticky; top: 0; z-index: 200;
+      background: var(--white);
+      border-bottom: 2px solid var(--gray);
+      height: 62px;
+      display: grid;
+      grid-template-columns: 56px 1fr 56px;
+      align-items: center;
+      padding: 0 20px;
+      gap: 12px;
+    }
+
+    /* hamburger */
+    .nav-hamburger {
+      display: flex; flex-direction: column;
+      gap: 5px; cursor: pointer;
+      background: none; border: none;
+      padding: 6px; border-radius: 6px;
+      transition: background 0.2s;
+    }
+    .nav-hamburger:hover { background: var(--gray); }
+    .nav-hamburger span {
+      display: block; width: 22px; height: 2px;
+      background: var(--navy); border-radius: 2px;
+    }
+
+    /* search */
+    .nav-search {
+      display: flex; align-items: center;
+      background: var(--off);
+      border: 1.5px solid var(--gray);
+      border-radius: 8px;
+      overflow: hidden;
+      max-width: 520px;
+      margin: 0 auto;
+      width: 100%;
+    }
+    .nav-search input {
+      flex: 1; border: none; background: transparent;
+      padding: 9px 14px;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 0.875rem; color: var(--text);
+      outline: none;
+    }
+    .nav-search input::placeholder { color: var(--muted); }
+    .nav-search button {
+      background: var(--teal); border: none;
+      padding: 0 14px; height: 100%;
+      color: var(--white); cursor: pointer;
+      display: flex; align-items: center;
+      transition: background 0.2s;
+    }
+    .nav-search button:hover { background: var(--teal-d); }
+    .nav-search svg { width: 16px; height: 16px; }
+
+    /* user icon */
+    .nav-user {
+      display: flex; align-items: center; justify-content: flex-end;
+    }
+    .nav-user button {
+      background: none; border: 1.5px solid var(--gray);
+      border-radius: 50%; width: 36px; height: 36px;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: border-color 0.2s;
+    }
+    .nav-user button:hover { border-color: var(--teal); }
+    .nav-user svg { width: 18px; height: 18px; color: var(--navy); }
+
+    /* ── SITE TITLE BAND ── */
+    .site-title-band {
+      text-align: center;
+      padding: 28px 20px 20px;
+      background: var(--white);
+    }
+    .site-title-band h1 {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      letter-spacing: -0.02em;
+      color: var(--navy);
+    }
+    .site-title-band h1 span.t { color: var(--teal); }
+    .site-title-band h1 span.o { color: var(--orange); }
+    .site-title-band .tagline {
+      font-size: 0.875rem;
+      color: var(--muted);
+      margin-top: 4px;
+      letter-spacing: 0.03em;
+    }
+
+    /* ── MAIN GRID ── */
+    .page-content {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 24px 60px;
+    }
+
+    /* ── ROW 1: Scholarships | Hero Image | Mentorship ── */
+    .row-1 {
+      display: grid;
+      grid-template-columns: 260px 1fr 260px;
+      gap: 0;
+      min-height: 380px;
+      border: 1.5px solid var(--gray);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 20px;
+    }
+
+    /* left panel */
+    .panel-left {
+      background: var(--white);
+      border-right: 1.5px solid var(--gray);
+      padding: 32px 24px;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+    .panel-section-label {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: 1.05rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--navy);
+      padding-bottom: 10px;
+      border-bottom: 3px solid var(--teal);
+      display: inline-block;
+    }
+    .panel-desc {
+      font-size: 0.875rem;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .panel-link {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 0.8rem; font-weight: 700;
+      color: var(--teal); text-decoration: none;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      transition: gap 0.2s;
+    }
+    .panel-link:hover { gap: 10px; }
+    .panel-link svg { width: 14px; height: 14px; }
+
+    /* center hero image area */
+    .hero-center {
+      position: relative;
+      background: linear-gradient(145deg, var(--navy) 0%, #0e1e30 60%, #162840 100%);
+      overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 40px 32px;
+      text-align: center;
+    }
+    /* circuit grid overlay */
+    .hero-center::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(57,175,166,0.07) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(57,175,166,0.07) 1px, transparent 1px);
+      background-size: 44px 44px;
+      pointer-events: none;
+    }
+    /* glow blob */
+    .hero-center::after {
+      content: '';
+      position: absolute;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(57,175,166,0.22) 0%, transparent 65%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+    .hero-center-inner {
+      position: relative; z-index: 2;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(57,175,166,0.15);
+      border: 1px solid rgba(57,175,166,0.5);
+      color: var(--teal);
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 5px 12px; border-radius: 999px;
+      margin-bottom: 20px;
+    }
+    .hero-badge::before {
+      content: '●'; font-size: 0.45rem;
+      animation: blink 2s infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.2} }
+
+    .hero-headline {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.4rem, 2.8vw, 2.1rem);
+      line-height: 1.15;
+      color: var(--white);
+      margin-bottom: 14px;
+    }
+    .hero-headline em {
+      font-style: normal;
+      color: var(--teal);
+    }
+    .hero-headline .hl-yellow { color: var(--yellow); }
+
+    .hero-sub-text {
+      color: rgba(255,255,255,0.65);
+      font-size: 0.9rem;
+      line-height: 1.7;
+      max-width: 400px;
+      margin: 0 auto 28px;
+    }
+    .hero-cta-group {
+      display: flex; gap: 12px; justify-content: center; flex-wrap: wrap;
+    }
+    .btn-teal {
+      background: var(--teal);
+      color: var(--white);
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: 2px solid var(--teal);
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+      letter-spacing: 0.02em;
+    }
+    .btn-teal:hover { background: var(--teal-d); transform: translateY(-1px); }
+    .btn-outline-white {
+      background: transparent;
+      color: var(--white);
+      padding: 10px 24px;
+      border-radius: 6px;
+      font-weight: 700;
+      font-size: 0.875rem;
+      text-decoration: none;
+      border: 2px solid rgba(255,255,255,0.35);
+      cursor: pointer;
+      transition: border-color 0.2s;
+      letter-spacing: 0.02em;
+    }
+    .btn-outline-white:hover { border-color: var(--yellow); color: var(--yellow); }
+
+    /* floating stat chips on hero */
+    .hero-chips {
+      display: flex; gap: 10px; justify-content: center;
+      flex-wrap: wrap; margin-top: 28px;
+    }
+    .hero-chip {
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 999px;
+      padding: 5px 14px;
+      font-size: 0.75rem;
+      color: rgba(255,255,255,0.75);
+      font-weight: 600;
+    }
+    .hero-chip b { color: var(--teal); }
+
+    /* right panel */
+    .panel-right {
+      background: var(--white);
+      border-left: 1.5px solid var(--gray);
+      padding: 32px 24px;
+      display: flex; flex-direction: column; gap: 18px;
+    }
+
+    .register-btn {
+      display: flex; align-items: center; justify-content: space-between;
+      background: var(--white);
+      border: 2px solid var(--navy);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800; font-size: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--navy);
+      text-decoration: none;
+      cursor: pointer;
+      margin-top: auto;
+      transition: background 0.2s, color 0.2s, border-color 0.2s;
+    }
+    .register-btn:hover {
+      background: var(--navy); color: var(--white);
+    }
+    .register-btn .arr {
+      display: flex; align-items: center; justify-content: center;
+      width: 28px; height: 28px;
+      background: var(--navy); border-radius: 4px;
+      color: var(--white);
+      flex-shrink: 0;
+      transition: background 0.2s;
+    }
+    .register-btn:hover .arr { background: var(--teal); }
+
+    /* ── ROW 2: Careers | About Us | Image ── */
+    .row-2 {
+      display: grid;
+      grid-template-columns: 220px 1fr 320px;
+      gap: 0;
+      border: 1.5px solid var(--gray);
+      border-radius: 16px;
+      overflow: hidden;
+      min-height: 300px;
+    }
+
+    .careers-panel {
+      background: var(--off);
+      border-right: 1.5px solid var(--gray);
+      padding: 32px 24px;
+      display: flex; flex-direction: column; gap: 14px;
+    }
+
+    .about-panel {
+      padding: 36px 40px;
+      display: flex; flex-direction: column;
+      justify-content: center; gap: 16px;
+      border-right: 1.5px solid var(--gray);
+    }
+    .about-heading {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900;
+      font-size: clamp(1.2rem, 2vw, 1.55rem);
+      color: var(--navy);
+      line-height: 1.2;
+    }
+    .about-heading span { color: var(--teal); }
+    .about-desc {
+      font-size: 0.9rem;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+    .success-story-row {
+      display: flex; align-items: center; gap: 12px;
+      background: var(--off);
+      border: 1.5px solid var(--gray);
+      border-radius: 10px;
+      padding: 12px 16px;
+      margin-top: 4px;
+    }
+    .ss-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      white-space: nowrap;
+    }
+    .ss-title {
+      font-size: 0.875rem;
+      font-weight: 700;
+      color: var(--navy);
+      font-style: italic;
+    }
+    .ss-link {
+      display: inline-flex; align-items: center; gap: 5px;
+      background: var(--navy); color: var(--white);
+      font-size: 0.7rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      padding: 6px 12px; border-radius: 6px;
+      text-decoration: none; white-space: nowrap;
+      transition: background 0.2s;
+    }
+    .ss-link:hover { background: var(--teal); }
+
+    /* right decorative panel */
+    .visual-panel {
+      background: linear-gradient(160deg, #e8f9f8 0%, #d0f0ee 40%, #f0f9f8 100%);
+      position: relative; overflow: hidden;
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      padding: 32px 28px;
+      gap: 16px;
+    }
+    .visual-panel::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        radial-gradient(circle at 20% 20%, rgba(57,175,166,0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255,165,0,0.12) 0%, transparent 50%);
+    }
+    .vp-inner { position: relative; z-index: 2; text-align: center; width: 100%; }
+    .vp-label {
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.12em; color: var(--teal); margin-bottom: 8px;
+    }
+    .vp-stat {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900; font-size: 2.2rem;
+      color: var(--navy); line-height: 1;
+      margin-bottom: 4px;
+    }
+    .vp-sub { font-size: 0.8rem; color: var(--muted); font-weight: 600; }
+
+    .vp-divider { width: 100%; height: 1px; background: rgba(57,175,166,0.25); }
+
+    .vp-mission {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.875rem;
+      color: var(--navy); line-height: 1.5;
+      font-style: italic;
+    }
+    .vp-501 {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--teal); color: var(--white);
+      font-size: 0.7rem; font-weight: 700;
+      padding: 5px 12px; border-radius: 999px;
+      letter-spacing: 0.06em; text-transform: uppercase;
+    }
+
+    /* ── BOTTOM NAV TABS ── */
+    .bottom-nav {
+      max-width: 1240px; margin: 24px auto 0;
+      padding: 0 24px;
+      display: flex; gap: 8px; flex-wrap: wrap;
+    }
+    .bottom-tab {
+      background: var(--off);
+      border: 1.5px solid var(--gray);
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 700; font-size: 0.8rem;
+      text-transform: uppercase; letter-spacing: 0.06em;
+      color: var(--navy); text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+    .bottom-tab:hover, .bottom-tab.active {
+      background: var(--navy); color: var(--white); border-color: var(--navy);
+    }
+    .bottom-tab.teal-tab {
+      background: var(--teal); color: var(--white); border-color: var(--teal);
+    }
+    .bottom-tab.teal-tab:hover { background: var(--teal-d); }
+
+    /* ── MOBILE DRAWER ── */
+    .drawer-overlay {
+      display: none; position: fixed; inset: 0;
+      background: rgba(0,0,0,0.5); z-index: 300;
+    }
+    .drawer-overlay.open { display: block; }
+    .drawer {
+      position: fixed; top: 0; left: -280px; bottom: 0;
+      width: 280px; background: var(--white);
+      z-index: 400; padding: 28px 24px;
+      transition: left 0.3s ease;
+      box-shadow: 4px 0 30px rgba(0,0,0,0.12);
+    }
+    .drawer.open { left: 0; }
+    .drawer-close {
+      background: none; border: none; cursor: pointer;
+      font-size: 1.4rem; color: var(--navy);
+      margin-bottom: 24px; display: block;
+    }
+    .drawer-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 900; font-size: 1.1rem; color: var(--navy);
+      margin-bottom: 28px; display: block;
+    }
+    .drawer-logo span { color: var(--teal); }
+    .drawer nav { display: flex; flex-direction: column; gap: 4px; }
+    .drawer nav a {
+      padding: 11px 14px; border-radius: 8px;
+      font-weight: 600; font-size: 0.9rem;
+      color: var(--navy); text-decoration: none;
+      transition: background 0.15s;
+    }
+    .drawer nav a:hover { background: var(--off); color: var(--teal); }
+    .drawer-cta {
+      margin-top: 20px;
+      display: block;
+      background: var(--teal); color: var(--white) !important;
+      text-align: center; border-radius: 8px;
+      padding: 12px !important; font-weight: 800 !important;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .row-1 { grid-template-columns: 1fr; }
+      .panel-left, .panel-right { border: none; border-bottom: 1.5px solid var(--gray); }
+      .panel-right { border-left: none; }
+      .hero-center { min-height: 320px; }
+      .row-2 { grid-template-columns: 1fr; }
+      .careers-panel, .about-panel { border: none; border-bottom: 1.5px solid var(--gray); }
+      .visual-panel { min-height: 220px; }
+    }
+
+    @media (max-width: 600px) {
+      .page-content { padding: 0 12px 40px; }
+      .site-title-band { padding: 18px 12px 14px; }
+      .bottom-nav { padding: 0 12px; }
+    }
+
+    /* ── FADE IN ── */
+    .fade-up {
+      opacity: 0; transform: translateY(20px);
+      animation: fadeUp 0.55s ease forwards;
+    }
+    @keyframes fadeUp { to { opacity:1; transform:none; } }
+    .fd-1 { animation-delay: 0.05s; }
+    .fd-2 { animation-delay: 0.15s; }
+    .fd-3 { animation-delay: 0.25s; }
+    .fd-4 { animation-delay: 0.35s; }
+    .fd-5 { animation-delay: 0.45s; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ HEADER ═══ -->
+  <header>
+    <!-- Hamburger -->
+    <div class="nav-hamburger" onclick="openDrawer()" role="button" aria-label="Open menu" tabindex="0">
+      <span></span><span></span><span></span>
+    </div>
+
+    <!-- Search -->
+    <div class="nav-search">
+      <input type="text" placeholder="Search scholarships, careers, mentors…" aria-label="Search"/>
+      <button aria-label="Search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- User icon -->
+    <div class="nav-user">
+      <button aria-label="User account">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+          <circle cx="12" cy="7" r="4"/>
+        </svg>
+      </button>
+    </div>
+  </header>
+
+  <!-- ═══ SITE TITLE ═══ -->
+  <div class="site-title-band fade-up fd-1">
+    <h1>Elevate<span class="t">Tech</span> A<span class="o">f</span>rica</h1>
+    <p class="tagline">Building Merit-Based Career Pathways for African Tech Talent</p>
+  </div>
+
+  <!-- ═══ MAIN CONTENT ═══ -->
+  <div class="page-content">
+
+    <!-- ROW 1 -->
+    <div class="row-1 fade-up fd-2">
+
+      <!-- LEFT: Scholarships -->
+      <div class="panel-left">
+        <div>
+          <span class="panel-section-label">Scholarships</span>
+        </div>
+        <p class="panel-desc">
+          Interested in companies that offer sponsorships for internships, co-ops, and full-time roles?
+        </p>
+        <p class="panel-desc">
+          Discover funding opportunities for students in Nigeria and Africa — from local programs to global scholarships.
+        </p>
+        <a href="#" class="panel-link">
+          Explore Scholarships
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="#" class="panel-link">
+          Visa Sponsorship Guide
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- CENTER: Hero -->
+      <div class="hero-center">
+        <div class="hero-center-inner">
+          <div class="hero-badge">Now Building · Launch Mid-2026</div>
+          <h2 class="hero-headline">
+            Empowering <em>African</em><br>
+            Tech Talent <span class="hl-yellow">Globally</span>
+          </h2>
+          <p class="hero-sub-text">
+            Bridging the gap between technology, education, and global opportunities for students and professionals across Nigeria and Africa.
+          </p>
+          <div class="hero-cta-group">
+            <a href="#" class="btn-teal">Join the Community</a>
+            <a href="#" class="btn-outline-white">Learn More</a>
+          </div>
+          <div class="hero-chips">
+            <span class="hero-chip">🇳🇬 <b>Nigeria</b> Focus</span>
+            <span class="hero-chip">✓ <b>501(c)(3)</b> Nonprofit</span>
+            <span class="hero-chip">🌍 <b>Africa-First</b></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Mentorship -->
+      <div class="panel-right">
+        <div>
+          <span class="panel-section-label">Mentorship</span>
+        </div>
+        <p class="panel-desc">
+          Connect with industry professionals worldwide and gain the guidance you need to launch and grow your tech career.
+        </p>
+        <p class="panel-desc">
+          Our mentor-mentee matching pairs students and young professionals with experienced tech leaders in their field.
+        </p>
+        <a href="#" class="register-btn">
+          Register Now
+          <span class="arr">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </span>
+        </a>
+      </div>
+    </div>
+    <!-- /ROW 1 -->
+
+    <!-- ROW 2 -->
+    <div class="row-2 fade-up fd-3">
+
+      <!-- LEFT: Careers -->
+      <div class="careers-panel">
+        <div>
+          <span class="panel-section-label">Careers</span>
+        </div>
+        <p class="panel-desc">
+          Explore pathways to internships, full-time roles, and visa-sponsored opportunities with global tech companies.
+        </p>
+        <a href="#" class="panel-link">
+          Browse Roles
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+        <a href="#" class="panel-link">
+          Resume Workshop
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+          </svg>
+        </a>
+      </div>
+
+      <!-- CENTER: About Us -->
+      <div class="about-panel">
+        <h2 class="about-heading">About Us: Empowering <span>Africa's Tech Talent</span></h2>
+        <p class="about-desc">
+          ElevateTech Africa is a registered 501(c)(3) nonprofit building the career infrastructure that previously didn't exist for African tech talent — creating merit-based pathways where opportunity is earned, not inherited through connections.
+        </p>
+        <div class="success-story-row">
+          <span class="ss-label">Success Stories:</span>
+          <span class="ss-title">From Lagos to Google: Mary's Journey</span>
+          <a href="#" class="ss-link">
+            Read More
+            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+
+      <!-- RIGHT: Visual Panel -->
+      <div class="visual-panel">
+        <div class="vp-inner">
+          <div class="vp-label">Our Reach</div>
+          <div class="vp-stat">Nigeria</div>
+          <div class="vp-sub">Initial Launch · Expanding to Kenya & South Africa</div>
+        </div>
+
+        <div class="vp-divider"></div>
+
+        <div class="vp-inner">
+          <div class="vp-label">Impact Goal</div>
+          <div class="vp-stat">1M+</div>
+          <div class="vp-sub">African tech learners reached</div>
+        </div>
+
+        <div class="vp-divider"></div>
+
+        <div class="vp-inner">
+          <div class="vp-mission">"Merit over connections — building the systems African talent deserves."</div>
+          <br/>
+          <span class="vp-501">✓ 501(c)(3) Registered</span>
+        </div>
+      </div>
+    </div>
+    <!-- /ROW 2 -->
+
+  </div>
+  <!-- /page-content -->
+
+  <!-- ═══ BOTTOM NAV TABS ═══ -->
+  <div class="bottom-nav fade-up fd-4">
+    <a href="#" class="bottom-tab teal-tab">Join Community</a>
+    <a href="#" class="bottom-tab">Scholarships</a>
+    <a href="#" class="bottom-tab">Mentorship</a>
+    <a href="#" class="bottom-tab">Careers</a>
+    <a href="#" class="bottom-tab">Bootcamps</a>
+    <a href="#" class="bottom-tab">Resources</a>
+    <a href="#" class="bottom-tab">About ETA</a>
+    <a href="#" class="bottom-tab">Contact</a>
+  </div>
+
+  <!-- ═══ MOBILE DRAWER ═══ -->
+  <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+  <div class="drawer" id="drawer">
+    <button class="drawer-close" onclick="closeDrawer()" aria-label="Close menu">✕</button>
+    <span class="drawer-logo">Elevate<span>Tech</span> Africa</span>
+    <nav>
+      <a href="#">🏠 Home</a>
+      <a href="#">🎓 Scholarships</a>
+      <a href="#">🤝 Mentorship</a>
+      <a href="#">💼 Careers</a>
+      <a href="#">💻 Bootcamps</a>
+      <a href="#">📄 Resources</a>
+      <a href="#">🌍 About ETA</a>
+      <a href="#">📬 Contact</a>
+      <a href="#" class="drawer-cta">Join Community →</a>
+    </nav>
+  </div>
+
+  <script>
+    function openDrawer() {
+      document.getElementById('drawer').classList.add('open');
+      document.getElementById('drawerOverlay').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+    function closeDrawer() {
+      document.getElementById('drawer').classList.remove('open');
+      document.getElementById('drawerOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+    document.addEventListener('keydown', e => { if(e.key === 'Escape') closeDrawer(); });
+  </script>
+</body>
+</html>
